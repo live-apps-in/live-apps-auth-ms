@@ -1,6 +1,7 @@
 import { inject } from "inversify";
 import { controller, httpGet, httpPost, requestBody } from "inversify-express-utils";
 import { DI_TYPES } from "../../core/inversify/types.di";
+import { PLATFORM } from "../enum/platform";
 import { AccountService } from "../service/account.service";
 import { SignUpDto } from "../_dto/accounts.dto";
 
@@ -17,8 +18,8 @@ export class AccountController{
         @requestBody() req: SignUpDto
     ) {
         const validatePayload = await SignUpDto.validate(req)
-        // return this.accountService.signup(req)
-        return ''
+
+        return this.accountService.signup(validatePayload)
     }
 
     ///User Profile

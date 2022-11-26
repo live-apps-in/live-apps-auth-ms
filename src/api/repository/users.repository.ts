@@ -1,6 +1,7 @@
 import { injectable } from "inversify";
 import AWS from 'aws-sdk'
-import { PutItemInput, GetItemInput, AttributeValue, AttributeMap } from "aws-sdk/clients/dynamodb";
+import { PutItemInput, GetItemInput, AttributeValue, AttributeMap, ScanInput } from "aws-sdk/clients/dynamodb";
+import { SignUpDto } from "../_dto/accounts.dto";
 
 const dynamoClient = new AWS.DynamoDB.DocumentClient()
 
@@ -15,11 +16,8 @@ export class UserRepository{
                 ...payload
             }
         }
-
-        const res = await dynamoClient.put(params).promise();
-        console.log(res)
-
-        return 'hola'
+        await dynamoClient.put(params).promise();
+        return payload
     }
 
     async findById<T>(id: T): Promise<AttributeMap> {
@@ -32,5 +30,17 @@ export class UserRepository{
 
         const res = await dynamoClient.get(params).promise();
         return res.Item
+    }
+
+    async findByEmail<T>(email: T): Promise<any> {
+        const params: GetItemInput = {
+            TableName: this.USERS_TABLE,
+            Key: {
+                email
+            }
+        }
+
+        const res = await dynamoClient.scan(params).promise();
+        return res.Items
     }
 }
