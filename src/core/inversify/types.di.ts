@@ -1,7 +1,7 @@
 export const DI_TYPES = {
-    ///Service
-    AccountService: Symbol.for('AccountService'),
+	///Service
+	AccountService: Symbol.for('AccountService'),
 
-    ///Repository
-    UserRepository: Symbol.for('UserRepository')
-}
+	///Repository
+	UserRepository: Symbol.for('UserRepository')
+};

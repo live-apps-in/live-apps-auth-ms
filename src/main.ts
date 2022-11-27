@@ -1,10 +1,10 @@
-import { App } from "./core/app";
+import { App } from './core/app';
 
 
 
 async function bootstrap() {
-     new App().bootstrap()
+	new App().bootstrap();
 }
 
-bootstrap()
+bootstrap();
 
