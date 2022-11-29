@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Start Container') {
             steps {
-                sh 'docker run -p 5001:5000 -d --name live-apps-auth live-apps-auth'
+                sh 'docker run -p 5003:5000 -d --name live-apps-auth live-apps-auth'
             }
         }
 
