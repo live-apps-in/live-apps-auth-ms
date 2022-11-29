@@ -4,7 +4,8 @@
   "description": "Authentication microservice for Live Apps",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/main.ts",
+    "start": "tsc && node ./dist/main.js",
+    "dev": "nodemon ./src/main.ts",
     "lint": "eslint . --ext .ts",
     "lint:fix": "npm run lint -- --fix"
   },
