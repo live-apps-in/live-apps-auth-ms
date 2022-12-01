@@ -18,6 +18,7 @@ export class AccountController{
 	) {
 		const validatePayload = await SignUpDto.validate(req);
 		return this.accountService.signup(validatePayload);
+		
 	}
 
     ///User Profile

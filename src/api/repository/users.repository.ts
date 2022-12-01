@@ -29,18 +29,20 @@ export class UserRepository{
 		};
 
 		const res = await dynamoClient.get(params).promise();
-		return res.Item;
+		return res.Item[0];
 	}
 
 	async findByEmail<T>(email: T): Promise<any> {
-		const params: GetItemInput = {
-			TableName: this.USERS_TABLE,
-			Key: {
-				email
-			}
+		const params = {
+			ExpressionAttributeValues: {
+    			':e': email
+			},
+			FilterExpression: 'email = :e',
+  			ProjectionExpression: 'id, email',
+  			TableName: this.USERS_TABLE
 		};
 
 		const res = await dynamoClient.scan(params).promise();
-		return res.Items;
+		return res.Items[0];
 	}
 }

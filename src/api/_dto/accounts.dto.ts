@@ -40,25 +40,3 @@ export class SignUpDto{
 		return validate;
 	}
 }
-
-///Sign in Payload
-export class SignInDto{
-    constructor(
-        public email: string,
-        public platform: string
-    ) { }
-    
-    async validate(dto: SignInDto) {
-        const schema = Joi.object({
-            email: Joi.string().required(),
-            platform: Joi.string().valid(
-                PLATFORM.ping,
-                PLATFORM.discord,
-            ).required()
-        })
-
-        const validate = schema.validateAsync(dto).catch(err => {
-            throw new ValidationException('Validation Exception', err)
-        })
-    }
-}
