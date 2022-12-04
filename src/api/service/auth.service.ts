@@ -7,8 +7,10 @@ import { DI_TYPES } from '../../core/inversify/types.di';
 import { randomSixDigitOtp } from '../../utils/calc';
 import { AuthRepository } from '../repository/auth.repository';
 import { UserRepository } from '../repository/users.repository';
-import { AuthDto } from '../_dto/auth.dto';
 import { v4 } from 'uuid';
+import { QueueService } from '../../queue/queue';
+import { QUEUE } from '../../queue/queue_types';
+import { MailDto, MailTypes } from '../../queue/shared/mail.dto';
 
 
 @injectable()
@@ -17,6 +19,7 @@ export class AuthService{
 	constructor(
         @inject(DI_TYPES.AuthRepository) private readonly authRepo: AuthRepository,
         @inject(DI_TYPES.UserRepository) private readonly userRepo: UserRepository,
+        @inject(DI_TYPES.QueueService) private readonly queueService: QueueService,
 	) { }
     
 	async sign_in(payload: any) {
@@ -59,14 +62,13 @@ export class AuthService{
 			}
 		});
 
-		////TODO - Mail OTP
-		// this.mailService.sendMail({
-		// 	type: 'send_otp',
-		// 	to: email,
-		// 	context: {
-		// 		otp
-		// 	}
-		// });
+		///Mail OTP (Queue)
+		const mailPayload = new MailDto(
+			email,
+			{ otp },
+			MailTypes.ping_send_otp
+		);
+		this.queueService.sendToQueue(mailPayload, QUEUE.SEND_MAIL);
 
 		return {
 			message: 'OTP sent',
