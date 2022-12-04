@@ -10,7 +10,7 @@ lerna-debug.log*
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 #Credentials
-config/credentials.json
+keys/credentials.json
 # Runtime data
 pids
 *.pid

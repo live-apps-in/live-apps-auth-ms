@@ -1,10 +1,8 @@
 import { injectable } from 'inversify';
-import AWS from 'aws-sdk';
-import { PutItemInput, GetItemInput, AttributeValue, AttributeMap, ScanInput } from 'aws-sdk/clients/dynamodb';
+import {dynamoClient} from '../../config/aws';
+import { PutItemInput, GetItemInput, AttributeMap } from 'aws-sdk/clients/dynamodb';
 import path from 'path';
 
-AWS.config.loadFromPath(path.join(__dirname, '../../../config/credentials.json'));
-const dynamoClient = new AWS.DynamoDB.DocumentClient();
 
 @injectable()
 export class UserRepository{
