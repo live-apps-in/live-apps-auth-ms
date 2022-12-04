@@ -1,10 +1,6 @@
 import AWS from 'aws-sdk';
 import 'dotenv/config';
+import path from 'path';
 
 ///TODO - Remove as it has no effect
-const awsConfig = {
-    accessKeyId: process.env.AWS_ACCESS_KEY,
-    accessSecretKey: process.env.AWS_SECRET_KEY,
-    region: process.env.AWS_REGION
-}
-AWS.config.update(awsConfig);
+// AWS.config.loadFromPath(path.join(__dirname, '../../config/credentials.json'));
