@@ -2,6 +2,7 @@ import AWS from 'aws-sdk';
 import { GetItemInput, PutItemInput, UpdateItemInput } from 'aws-sdk/clients/dynamodb';
 import { injectable } from 'inversify';
 
+AWS.config.loadFromPath('/config/credentials.json');
 const dynamoClient = new AWS.DynamoDB.DocumentClient();
 @injectable()
 export class AuthRepository{
