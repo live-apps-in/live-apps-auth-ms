@@ -29,7 +29,7 @@ export class UserRepository{
 		};
 
 		const res = await dynamoClient.get(params).promise();
-		return res.Item[0];
+		return res.Item;
 	}
 
 	async findByEmail<T>(email: T): Promise<any> {

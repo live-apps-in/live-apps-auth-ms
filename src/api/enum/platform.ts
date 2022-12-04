@@ -3,3 +3,8 @@ export enum PLATFORM {
     ping = 'ping',
     discord = 'discord'
 }
+
+export const APPS = [
+	'ping',
+	'discord'
+];

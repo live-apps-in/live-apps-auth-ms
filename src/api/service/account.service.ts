@@ -40,9 +40,25 @@ export class AccountService{
 		
 	}
 
+	///Register new Apps to Live Accounts
+	async registerApp(appName: string, userId: string) {
+		const user = await this.userRepo.findById(userId);
+		if (!user) throw new HttpException('User not found', 400);
+		
+		let apps = user?.apps || {};
+		apps = {
+			...user,
+			[appName]: {
+				isActive: true
+			}
+		};
+
+		await this.userRepo;
+	}
+
 	///User Profile
-	async profile() {
-		const res = await this.userRepo.findById('abc123');
+	async profile(userId: string) {
+		const res = await this.userRepo.findById(userId);
 		return res;
 	}
 }

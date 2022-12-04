@@ -1,6 +1,10 @@
 import { inject } from 'inversify';
-import { controller, httpGet, httpPost, requestBody } from 'inversify-express-utils';
+import { controller, httpGet, httpPost, requestBody, requestParam } from 'inversify-express-utils';
+import { Req } from '../../core/custom_types/custom.types';
+import { HttpException } from '../../core/exception';
 import { DI_TYPES } from '../../core/inversify/types.di';
+import { AuthGuard } from '../../guards/auth.guard';
+import { APPS } from '../enum/platform';
 import { AccountService } from '../service/account.service';
 import { SignUpDto } from '../_dto/accounts.dto';
 
@@ -21,10 +25,24 @@ export class AccountController{
 		
 	}
 
-    ///User Profile
-    @httpGet('/profile')
-    async profile() {
-    	const res = await this.accountService.profile();
-    	return res;
+	///Register App with Live Accounts
+	@httpGet('/apps/register/:appName', AuthGuard)
+    async registerApp(
+		@requestParam('appName') appName: string,
+			req: Req
+    ) {
+    	const {userId} = req.userData;
+    	///Validate App
+    	if (!APPS.includes(appName)) throw new HttpException('Invalid App', 400);
+		
+    	await this.accountService.registerApp(appName, userId);
     }
+
+    ///User Profile
+    @httpGet('/profile', AuthGuard)
+	async profile(req: Req) {
+		const {userId} = req.userData;
+    	const res = await this.accountService.profile(userId);
+    	return res;
+	}
 }

@@ -87,8 +87,6 @@ export class AuthService{
         
 		/////Validate OTP
 		const { _2fa } = getAuth;
-		console.log(getAuth);
-		console.log(_2fa);
 		if (!_2fa) throw new HttpException('OTP Expired', 400);
 
 		try {
@@ -105,13 +103,13 @@ export class AuthService{
 			email,
 			role: user.role,
 			sessionId
-		}, this.JWT_SECRET, { expiresIn: '60s' });
+		}, this.JWT_SECRET, { expiresIn: '12000s' });
 
 		////Refresh Token
 		const refreshToken = jwt.sign({
 			userId: user._id,
 			sessionId
-		}, this.JWT_SECRET, {expiresIn: '120s'});
+		}, this.JWT_SECRET, {expiresIn: '12000s'});
 
 		///Update Session
 		await this.authRepo.update({
