@@ -3,12 +3,6 @@ import AWS from 'aws-sdk';
 import { PutItemInput, GetItemInput, AttributeValue, AttributeMap, ScanInput } from 'aws-sdk/clients/dynamodb';
 import { SignUpDto } from '../_dto/accounts.dto';
 
-const awsConfig = {
-    accessKeyId: process.env.AWS_ACCESS_KEY,
-    accessSecretKey: process.env.AWS_SECRET_KEY,
-    region: process.env.AWS_REGION
-}
-AWS.config.update(awsConfig);
 const dynamoClient = new AWS.DynamoDB.DocumentClient();
 
 @injectable()
