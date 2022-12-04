@@ -3,6 +3,7 @@ import AWS from 'aws-sdk';
 import { PutItemInput, GetItemInput, AttributeValue, AttributeMap, ScanInput } from 'aws-sdk/clients/dynamodb';
 import { SignUpDto } from '../_dto/accounts.dto';
 
+AWS.config.loadFromPath('../../../config/credentials.json');
 const dynamoClient = new AWS.DynamoDB.DocumentClient();
 
 @injectable()
