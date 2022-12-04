@@ -1,6 +1,7 @@
 import AWS from 'aws-sdk';
 import 'dotenv/config';
 
+///TODO - Remove as it has no effect
 const awsConfig = {
     apiVersion: "2010-12-01",
     accessKeyId: process.env.AWS_ACCESS_KEY,

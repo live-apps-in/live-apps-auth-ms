@@ -2,7 +2,6 @@ import AWS from 'aws-sdk';
 import { GetItemInput, PutItemInput, UpdateItemInput } from 'aws-sdk/clients/dynamodb';
 import { injectable } from 'inversify';
 const awsConfig = {
-    apiVersion: "2010-12-01",
     accessKeyId: process.env.AWS_ACCESS_KEY,
     accessSecretKey: process.env.AWS_SECRET_KEY,
     region: process.env.AWS_REGION
