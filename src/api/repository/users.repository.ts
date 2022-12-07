@@ -44,4 +44,16 @@ export class UserRepository{
 		const res = await dynamoClient.scan(params).promise();
 		return res.Items[0];
 	}
+
+	async update(payload: any) {
+
+		const params: PutItemInput= {
+			TableName: this.USERS_TABLE,
+			Item: {
+				...payload
+			}
+			
+		};
+		await dynamoClient.put(params).promise();
+	}
 }

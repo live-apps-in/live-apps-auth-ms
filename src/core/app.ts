@@ -29,7 +29,7 @@ export class App{
 					return res.status(400).json({ error: 'Validation Exception', errorInfo: err.error});
 				}
 				else {
-					console.log(err);
+					// console.log(err);
 					return res.status(500).json({ error: 'Internal Server Exception' });
 				}
 

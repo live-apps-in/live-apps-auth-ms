@@ -26,7 +26,7 @@ export class AccountController{
 	}
 
 	///Register App with Live Accounts
-	@httpGet('/apps/register/:appName', AuthGuard)
+	@httpPost('/apps/register/:appName', AuthGuard)
     async registerApp(
 		@requestParam('appName') appName: string,
 			req: Req
@@ -35,7 +35,8 @@ export class AccountController{
     	///Validate App
     	if (!APPS.includes(appName)) throw new HttpException('Invalid App', 400);
 		
-    	await this.accountService.registerApp(appName, userId);
+    	const pingUserData = await this.accountService.registerApp(appName, userId, req.body);
+    	return pingUserData;
     }
 
     ///User Profile

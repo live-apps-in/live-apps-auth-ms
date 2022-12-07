@@ -13,6 +13,8 @@ import { UserRepository } from '../../api/repository/users.repository';
 import { AuthRepository } from '../../api/repository/auth.repository';
 import { AuthService } from '../../api/service/auth.service';
 import { QueueService } from '../../queue/queue';
+import { RestService } from '../../shared/rest.service';
+import { PingService } from '../../shared/ping.service';
 
 ///Bindings
 ///Service
@@ -21,6 +23,10 @@ container.bind<AuthService>(DI_TYPES.AuthService).to(AuthService);
 
 ///Shared Service
 container.bind<QueueService>(DI_TYPES.QueueService).to(QueueService);
+container.bind<RestService>(DI_TYPES.RestService).to(RestService);
+
+///Microservice
+container.bind<PingService>(DI_TYPES.PingService).to(PingService);
 
 ///Repository
 container.bind<UserRepository>(DI_TYPES.UserRepository).to(UserRepository);
