@@ -109,7 +109,7 @@ export class AuthService{
 
 		////Refresh Token
 		const refreshToken = jwt.sign({
-			userId: user._id,
+			userId: user.id,
 			sessionId
 		}, this.JWT_SECRET, {expiresIn: '12000s'});
 
