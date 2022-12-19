@@ -21,7 +21,7 @@ export class App{
 			app.use(<T>(err: T, req: Request, res: Response, next: NextFunction) => {
 				///HTTP Exception
 				if (err instanceof HttpException) {
-					return res.status(err.statusCode).json({ error: err.message });
+					return res.status(err.statusCode).json({ error: err.message, errorInfo: err.error });
 				}
                 
 				///Validation Exception
@@ -29,7 +29,7 @@ export class App{
 					return res.status(400).json({ error: 'Validation Exception', errorInfo: err.error});
 				}
 				else {
-					// console.log(err);
+					console.log(err);
 					return res.status(500).json({ error: 'Internal Server Exception' });
 				}
 

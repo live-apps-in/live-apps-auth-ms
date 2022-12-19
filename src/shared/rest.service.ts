@@ -1,5 +1,6 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosPromise } from 'axios';
 import { injectable } from 'inversify';
+import { HttpException } from '../core/exception';
 
 
 interface axiosConfig{
@@ -26,10 +27,16 @@ export class RestService{
 			headers
 		};
 		
-		const res = await axios(axiosConfig).catch(err => {
-			console.log(err.message);
-		});
-		return res;
+		let resData: any;
+		const res = await axios(axiosConfig)
+			.then(res => {
+				resData = res.data;
+			})
+			.catch((err: AxiosError) => {
+				throw new HttpException('Bad Request', 400, err.response.data);
+			});
+		
+		return resData;
 	}
     
 }

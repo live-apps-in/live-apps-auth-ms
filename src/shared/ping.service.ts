@@ -27,10 +27,8 @@ export class PingService{
 			body: {...payload}
 		});
 
-		const resData = getResponse?.data;
-		if (resData) return resData;
-
-		throw new Error(resData.error);
+		if (getResponse) return getResponse;
+		throw new HttpException('Ping Service Unavailable', 500);
 	}
 	
 }
