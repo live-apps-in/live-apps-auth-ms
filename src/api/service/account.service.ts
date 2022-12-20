@@ -7,12 +7,14 @@ import { HttpException } from '../../core/exception';
 import { CreateAuthDto } from '../_dto/auth.dto';
 import { AuthRepository } from '../repository/auth.repository';
 import { PingService, PING_MS_ACTIONS } from '../../shared/ping.service';
+import { AppRegistrationService } from './app_registration.service';
 @injectable()
 export class AccountService{
 	constructor(
 		@inject(DI_TYPES.UserRepository) private readonly userRepo: UserRepository,
 		@inject(DI_TYPES.AuthRepository) private readonly authRepo: AuthRepository,
 		@inject(DI_TYPES.PingService) private readonly pingService: PingService,
+		@inject(DI_TYPES.AppRegistrationService) private readonly appRegistrationService: AppRegistrationService,
 	) { }
     
 	///Create User
@@ -50,10 +52,11 @@ export class AccountService{
 		let apps = user?.apps || {};
 
 		///Throw error if app already registered
-		if (apps[appName]) throw new HttpException('App already registered with Live Accounts', 400);
+		if (apps[appName]) throw new HttpException('App already registered with Live Accounts', 409);
 		
 		///Create user in Ping [Ping Service]
 		payload.email = user.email;
+		return await this.appRegistrationService.factory(appName, user, payload);
 		const pingUser = await this.pingService.call(PING_MS_ACTIONS.createUser, payload);
 		if (!pingUser) throw new Error('Unable to fetch created User from Ping Service');
 		

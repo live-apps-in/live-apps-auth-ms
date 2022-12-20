@@ -2,6 +2,7 @@ export const DI_TYPES = {
 	///Service
 	AccountService: Symbol.for('AccountService'),
 	AuthService: Symbol.for('AuthService'),
+	AppRegistrationService: Symbol.for('AppRegistrationService'),
 
 	///Shared Service
 	QueueService: Symbol.for('QueueService'),

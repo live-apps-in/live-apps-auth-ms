@@ -15,11 +15,13 @@ import { AuthService } from '../../api/service/auth.service';
 import { QueueService } from '../../queue/queue';
 import { RestService } from '../../shared/rest.service';
 import { PingService } from '../../shared/ping.service';
+import { AppRegistrationService } from '../../api/service/app_registration.service';
 
 ///Bindings
 ///Service
 container.bind<AccountService>(DI_TYPES.AccountService).to(AccountService);
 container.bind<AuthService>(DI_TYPES.AuthService).to(AuthService);
+container.bind<AppRegistrationService>(DI_TYPES.AppRegistrationService).to(AppRegistrationService);
 
 ///Shared Service
 container.bind<QueueService>(DI_TYPES.QueueService).to(QueueService);

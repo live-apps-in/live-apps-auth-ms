@@ -31,7 +31,7 @@ export class SignInDto{
 			platform: Joi.string().valid(
 				PLATFORM.accounts,
 				PLATFORM.ping,
-				PLATFORM.discord
+				PLATFORM.live_cord
 			).required()
 		});
 

@@ -4,10 +4,10 @@ import { PLATFORM } from '../enum/platform';
 
 
 export interface Apps{
-    ping: {
+    ping?: {
         userId: string
     },
-    discord: {
+    live_cord?: {
         userId: string
     },
 
@@ -29,7 +29,7 @@ export class SignUpDto{
 			email: Joi.string().email().required(),
 			platform: Joi.string().valid(
 				PLATFORM.ping,
-				PLATFORM.discord
+				PLATFORM.live_cord
 			).required()
 		});
 

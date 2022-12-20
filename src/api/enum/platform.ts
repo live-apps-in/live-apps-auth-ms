@@ -1,10 +1,10 @@
 export enum PLATFORM {
     accounts = 'accounts',
     ping = 'ping',
-    discord = 'discord'
+    live_cord = 'live_cord'
 }
 
 export const APPS = [
 	'ping',
-	'discord'
+	'live_cord'
 ];

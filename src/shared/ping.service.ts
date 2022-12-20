@@ -54,9 +54,7 @@ class PingMicroServiceFactory{
 	///Temp access Token for Internal API call
 	private createAccessToken() {
 		return new Promise((res, rej) => {
-			const accessToken = jwt.sign({ scope: 'ping' }, process.env.INTERNAL_MS_SECRET, {
-				expiresIn: '15s'
-			});
+			const accessToken = jwt.sign({ scope: 'ping' }, process.env.INTERNAL_MS_SECRET);
 					
 			res(accessToken);
 		});
