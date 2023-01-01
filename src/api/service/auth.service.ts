@@ -82,6 +82,7 @@ export class AuthService{
         
 		////Get User Info
 		const user = await this.userRepo.findByEmail(email);
+		console.log(user);
 		if (!user) throw new HttpException('Email not found', 400);
 
 		///Get Ref
@@ -103,7 +104,7 @@ export class AuthService{
 		const jwtToken = jwt.sign({
 			userId: user.id,
 			email,
-			role: user.role,
+			apps: user.apps,
 			sessionId
 		}, this.JWT_SECRET, { expiresIn: '12000s' });
 

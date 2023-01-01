@@ -37,7 +37,7 @@ export class UserRepository{
     			':e': email
 			},
 			FilterExpression: 'email = :e',
-  			ProjectionExpression: 'id, email',
+  			ProjectionExpression: 'id, email, apps',
   			TableName: this.USERS_TABLE
 		};
 
