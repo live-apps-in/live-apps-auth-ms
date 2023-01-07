@@ -106,7 +106,7 @@ export class AuthService{
 			email,
 			apps: user.apps,
 			sessionId
-		}, this.JWT_SECRET, { expiresIn: '12000s' });
+		}, this.JWT_SECRET);
 
 		////Refresh Token
 		const refreshToken = jwt.sign({
