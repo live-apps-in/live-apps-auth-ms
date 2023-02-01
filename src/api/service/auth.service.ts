@@ -82,7 +82,6 @@ export class AuthService{
         
 		////Get User Info
 		const user = await this.userRepo.findByEmail(email);
-		console.log(user);
 		if (!user) throw new HttpException('Email not found', 400);
 
 		///Get Ref

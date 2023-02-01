@@ -31,7 +31,6 @@ export class AuthController{
 	    ///get Access Token from Refresh Token
     @httpGet('/token/refresh', RefreshToken)
     async refreshAccessToken(req: Req) {
-    	console.log(req.accessToken);
     	return {accessToken: req.accessToken};
         
     }

@@ -17,9 +17,8 @@ export const RefreshToken = async (req: Req, res: Response, next: NextFunction) 
 		const { userId }: any = jwt.verify(refreshToken, process.env.JWT_SECRET);
 	   
 	   ////Create Access Token
-	   const AuthRepo = await container.get<AuthRepository>(DI_TYPES.AuthRepository);
+	   const AuthRepo = container.get<AuthRepository>(DI_TYPES.AuthRepository);
 	   const user = await AuthRepo.findByUserId(userId);
-		console.log(user, 'user');
 		const sessionId = v4();
 
 		const jwtToken = jwt.sign({
