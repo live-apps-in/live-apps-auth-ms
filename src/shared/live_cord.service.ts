@@ -4,20 +4,20 @@ import { HttpException } from '../core/exception';
 import { DI_TYPES } from '../core/inversify/types.di';
 import { RestService } from './rest.service';
 
-export enum PING_MS_ACTIONS {
+export enum LiveCord_MS_ACTIONS {
     createUser = 'createUser'
 }
 
-const PING_API = 'https://api.ping.jagalive.in';
-// const PING_API = 'http://127.0.0.1:5001';
+// const LIVECORD_API = 'https://api.livecord.jagalive.in';
+const LIVECORD_API = 'http://127.0.0.1:5002';
 
 @injectable()
-export class PingService{
+export class LiveCordService{
 	constructor(
 		@inject(DI_TYPES.RestService) private readonly restService: RestService
 	){}
 	async call(type: string, payload: any) {
-		const buildConfig = await new PingMicroServiceFactory().getResponseConfig(type);
+		const buildConfig = await new LiveCordMicroServiceFactory().getResponseConfig(type);
 		const getResponse = await this.restService.axiosInstance({
 			url: buildConfig.url + buildConfig.route,
 			method: buildConfig.method,
@@ -27,18 +27,18 @@ export class PingService{
 		});
 
 		if (getResponse) return getResponse;
-		throw new HttpException('Ping Service Unavailable', 500);
+		throw new HttpException('LiveCord Service Unavailable', 500);
 	}
 	
 }
 
-class PingMicroServiceFactory{
+class LiveCordMicroServiceFactory{
 	async getResponseConfig(type: string) {
 		const config: any = {};
 
 		switch (type) {
-		case PING_MS_ACTIONS.createUser:
-			config.url = PING_API;
+		case LiveCord_MS_ACTIONS.createUser:
+			config.url = LIVECORD_API;
 			config.route = '/user/signup';
 			config.method = 'post';
 			config.headers = {
@@ -46,15 +46,14 @@ class PingMicroServiceFactory{
 			};
 			break;
 		default:
-			throw new Error('Invalid Ping Microservice Type');
+			throw new Error('Invalid LiveCord Microservice Type');
 		}
 		return config;
 	}
 	///Temp access Token for Internal API call
 	private createAccessToken() {
 		return new Promise((res, rej) => {
-			const accessToken = jwt.sign({ scope: 'ping' }, process.env.INTERNAL_MS_SECRET);
-					
+			const accessToken = jwt.sign({ scope: 'live_cord' }, process.env.INTERNAL_MS_SECRET);		
 			res(accessToken);
 		});
 			

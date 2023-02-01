@@ -6,5 +6,6 @@ export enum PLATFORM {
 
 export const APPS = [
 	'ping',
-	'live_cord'
+	'live_cord',
+	'accounts'
 ];

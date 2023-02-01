@@ -16,6 +16,7 @@ import { QueueService } from '../../queue/queue';
 import { RestService } from '../../shared/rest.service';
 import { PingService } from '../../shared/ping.service';
 import { AppRegistrationService } from '../../api/service/app_registration.service';
+import { LiveCordService } from '../../shared/live_cord.service';
 
 ///Bindings
 ///Service
@@ -29,6 +30,7 @@ container.bind<RestService>(DI_TYPES.RestService).to(RestService);
 
 ///Microservice
 container.bind<PingService>(DI_TYPES.PingService).to(PingService);
+container.bind<LiveCordService>(DI_TYPES.LiveCordService).to(LiveCordService);
 
 ///Repository
 container.bind<UserRepository>(DI_TYPES.UserRepository).to(UserRepository);

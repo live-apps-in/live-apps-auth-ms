@@ -31,12 +31,12 @@ export class AccountController{
 		@requestParam('appName') appName: string,
 			req: Req
     ) {
-    	const {userId} = req.userData;
+    	const { userId } = req.userData;
     	///Validate App
     	if (!APPS.includes(appName)) throw new HttpException('Invalid App', 400);
 		
-    	const pingUserData = await this.accountService.registerApp(appName, userId, req.body);
-    	return pingUserData;
+    	const registerAppData = await this.accountService.registerApp(appName, userId, req.body);
+    	return registerAppData;
     }
 
     ///User Profile

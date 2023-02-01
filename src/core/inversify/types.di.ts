@@ -10,6 +10,7 @@ export const DI_TYPES = {
 
 	///Microservice
 	PingService: Symbol.for('PingService'),
+	LiveCordService: Symbol.for('LiveCordService'),
 
 	///Repository
 	UserRepository: Symbol.for('UserRepository'),

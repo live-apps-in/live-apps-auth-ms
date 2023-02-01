@@ -49,7 +49,7 @@ export class AccountService{
 		const user = await this.userRepo.findById(userId);
 		if (!user) throw new HttpException('User not found', 400);
 		
-		let apps = user?.apps || {};
+		const apps = user?.apps || {};
 
 		///Throw error if app already registered
 		if (apps[appName]) throw new HttpException('App already registered with Live Accounts', 409);
@@ -57,23 +57,6 @@ export class AccountService{
 		///Create user in Ping [Ping Service]
 		payload.email = user.email;
 		return await this.appRegistrationService.factory(appName, user, payload);
-		const pingUser = await this.pingService.call(PING_MS_ACTIONS.createUser, payload);
-		if (!pingUser) throw new Error('Unable to fetch created User from Ping Service');
-		
-		apps = {
-			...apps,
-			[appName]: {
-				isActive: true,
-				userId: pingUser._id
-			}
-		};
-
-		const updatePayload = { ...user };
-		updatePayload.apps = apps;
-
-		await this.userRepo.update(updatePayload);
-
-		return pingUser;
 	}
 
 	///User Profile
