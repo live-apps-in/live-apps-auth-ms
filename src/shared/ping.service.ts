@@ -8,7 +8,7 @@ export enum PING_MS_ACTIONS {
     createUser = 'createUser'
 }
 
-const PING_API = 'https://api.ping.jagalive.in';
+const PING_API = 'https://api.ping.jaga.live';
 // const PING_API = 'http://127.0.0.1:5001';
 
 @injectable()

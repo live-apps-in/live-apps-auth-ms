@@ -8,8 +8,8 @@ export enum LiveCord_MS_ACTIONS {
     createUser = 'createUser'
 }
 
-// const LIVECORD_API = 'https://api.livecord.jagalive.in';
-const LIVECORD_API = 'http://127.0.0.1:5002';
+const LIVECORD_API = 'https://api.livecord.jaga.live';
+// const LIVECORD_API = 'http://127.0.0.1:5002';
 
 @injectable()
 export class LiveCordService{

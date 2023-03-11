@@ -2,7 +2,7 @@ import amqp from 'amqplib';
 import { injectable } from 'inversify';
 
 
-const rabbitURL = 'amqp://queue.jagalive.in?heartbeat=30';
+const rabbitURL = 'amqp://queue.jaga.live?heartbeat=30';
 const RABBIT_USER = process.env.RABBIT_USER;
 const RABBIT_PASS = process.env.RABBIT_PASS;
 const opt = { credentials: require('amqplib').credentials.plain(RABBIT_USER, RABBIT_PASS) };
